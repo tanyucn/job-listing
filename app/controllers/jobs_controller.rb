@@ -11,8 +11,16 @@ class JobsController < ApplicationController
   end
 
   def index
-    @jobs = Job.all
+    @jobs = case params[:order]
+            when 'by_lower_bound'
+              Job.published.order('wage_lower_bound DESC')
+            when 'by_upper_bound'
+              Job.published.order('wage_upper_bound DESC')
+            else
+              Job.published.recent
+            end
   end
+
 
   def new
     @job = Job.new
