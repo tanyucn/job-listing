@@ -10,6 +10,7 @@ class JobsController < ApplicationController
     end
   end
 
+
   def index
     @jobs = case params[:order]
             when 'by_lower_bound'
